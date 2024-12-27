@@ -173,7 +173,7 @@ export class CdkManagedRagStack extends cdk.Stack {
     const collectionArn = OpenSearchCollection.attrArn
     const opensearch_url = OpenSearchCollection.attrCollectionEndpoint
 
-    new cdk.CfnOutput(this, 'OpensearchCollectionEndpoint', {
+    new cdk.CfnOutput(this, `OpensearchCollectionEndpoint-${projectName}`, {
       value: opensearch_url,
       description: 'The endpoint of opensearch correction',
     });
