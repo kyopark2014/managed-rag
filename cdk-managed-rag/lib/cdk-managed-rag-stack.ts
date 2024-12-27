@@ -212,6 +212,7 @@ export class CdkManagedRagStack extends cdk.Stack {
     });
     OpenSearchCollection.addDependency(netPolicy);
 
+    const account = new iam.AccountPrincipal(this.account)
     const dataAccessPolicyName = `data-${projectName}`
     const dataAccessPolicy = new opensearchserverless.CfnAccessPolicy(this, `opensearch-data-collection-policy-for-${projectName}`, {
       name: dataAccessPolicyName,
@@ -243,10 +244,11 @@ export class CdkManagedRagStack extends cdk.Stack {
             }
           ],
           Principal: [
-            `arn:aws:iam::${accountId}:role/${knowledge_base_role.roleName}`,
-            `arn:aws:iam::${accountId}:role/role-lambda-chat-ws-for-${projectName}-${region}`,
+            //`arn:aws:iam::${accountId}:role/${knowledge_base_role.roleName}`,
+            //`arn:aws:iam::${accountId}:role/role-lambda-chat-ws-for-${projectName}-${region}`,
             //`arn:aws:iam::${accountId}:role/administration`,
-            `arn:aws:sts::${accountId}:assumed-role/administration/ksdyb-Isengard`, 
+            //`arn:aws:sts::${accountId}:assumed-role/administration/ksdyb-Isengard`, 
+            account.arn
           ], 
         },
       ]),
